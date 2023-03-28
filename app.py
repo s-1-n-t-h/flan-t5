@@ -1,14 +1,11 @@
-from transformers import AutoTokenizer, pipeline
-from optimum.onnxruntime import ORTModelForSeq2SeqLM
+from transformers import pipeline
 import torch
 import re
 import runpod
 
 def handler(event):
     device = 0 if torch.cuda.is_available() else -1
-    onnx_model = ORTModelForSeq2SeqLM.from_pretrained('braindao/flan-t5-cnn',from_transformers=True)
-    tokenizer = AutoTokenizer.from_pretrained('braindao/flan-t5-cnn')
-    model = pipeline("summarization", model=onnx_model, tokenizer=tokenizer)
+    model = pipeline('summarization', model="braindao/flan-t5-cnn",device=device)
 
     # Parse out your arguments
     prompt = event['input'].get('content',None)
