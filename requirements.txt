@@ -18,5 +18,5 @@ numpy
 matplotlib
 evaluate
 regex
-protobuf==3.18.3
+protobuf==4.25.8
 runpod
